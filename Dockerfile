@@ -1,4 +1,4 @@
-FROM simple-html:1.0.0
+FROM nginx
 COPY home.html /usr/share/nginx/html/index.html
 ADD ivan.html /usr/share/nginx/html/
 ADD page1.html /usr/share/nginx/html/
