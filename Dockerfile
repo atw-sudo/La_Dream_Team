@@ -1,4 +1,4 @@
-FROM nginx
+FROM nginx:1.23.3
 COPY home.html /usr/share/nginx/html/index.html
 ADD ivan.html /usr/share/nginx/html/
 ADD page1.html /usr/share/nginx/html/
