@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build Docker Image') {
+            steps {                
+                  sh 'docker build -t atw1a/simple-html:1.0.0.${env.BUILD_NUMBER} .'
+                  sh 'docker login --username atw1a --password dckr_pat_mpfMyhD18biRHClJh7j6tOTcj18'
+                  sh 'docker push atw1a/simple-html:1.0.0.${env.BUILD_NUMBER}'
+
+            }
+         }
+    }
+}
