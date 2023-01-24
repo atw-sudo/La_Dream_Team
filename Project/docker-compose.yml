@@ -1,0 +1,25 @@
+version: '3'
+services:
+  db:
+    image: db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: project
+      MYSQL_DATABASE: project
+      MYSQL_USER: project
+      MYSQL_PASSWORD: project
+    volumes:
+      - "./project.sql:/docker-entrypoint-initdb.d/mydatabase.sql"
+  web:
+    image: meapp
+    ports:
+      - "8060:80"
+    depends_on:
+      - db
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: project
+      MYSQL_PASSWORD: project
+      MYSQL_DB: project
+
