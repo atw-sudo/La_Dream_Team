@@ -1,1 +1,1 @@
-<?php $connect= mysqli_connect("localhost","project","project","project") ?> 
+<?php $connect= mysqli_connect("db","project","project","project") ?> 
