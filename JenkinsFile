@@ -8,7 +8,6 @@ pipeline {
                   sh 'docker login --username atw1a --password dckr_pat_mpfMyhD18biRHClJh7j6tOTcj18'
                   sh 'docker push atw1a/simple-html:1.0.0'
 
-
             }
          }
     }  
