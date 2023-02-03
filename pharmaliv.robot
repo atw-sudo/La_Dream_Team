@@ -9,7 +9,7 @@ ${URL}            http://localhost:8000
 
 *** Keywords ***
 !SuiteSetup
-    Open Browser    about:blank   ff
+    Open Browser    about:blank   ff  --headless
     Sleep  2s
     
 !SuiteTeardown
