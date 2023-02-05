@@ -1,13 +1,13 @@
 version: '3'
 services:
   db:
-    image: atw1a/dbapp
+    image: atw1a/dbapp:latest
     ports:
       - "3306:3306"
     volumes:
       - "./project.sql:/docker-entrypoint-initdb.d/mydatabase.sql"
   web:
-    image: atw1a/webapp
+    image: atw1a/webapp:latest
     ports:
       - "8000:80"
     depends_on:
