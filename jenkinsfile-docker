@@ -14,22 +14,26 @@ pipeline {
          
         stage('Build de l’image de l’application'){
             steps{
+                  slackSend channel: 'devops', message: 'Build de l'application'
                   sh 'docker build -t webapp:$IMAGE_VERSION .'
             }
         }
         
         stage('Build de l’image de la base de données'){
             steps{
+                  slackSend channel: 'devops', message: 'Build de la base de donnéés'
                   sh 'docker build -f Dockerfiledb -t dbapp:$IMAGE_VERSION .'
             }
         }
         
         stage('Déploiement des services via Docker Compose'){
             steps{
+                  slackSend channel: 'devops', message: 'Déploiement des services avec Docker-compose'
                   sh 'docker-compose up -d'
                   sh 'sleep 100s'
                   sh 'docker stop devops_web_1'
                   sh 'docker stop devops_db_1'
+                  slackSend channel: 'devops', message: 'Fin Déploiement'
             }
         }
         

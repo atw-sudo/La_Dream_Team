@@ -36,6 +36,7 @@ pipeline {
         stage('Déploiement de l’application sur Kubernetes'){
             steps{
                   sh 'ls'
+                  slackSend channel: 'devops', message: 'Début Déploiement Kubernetes'
                   sh 'kubectl create -f db-deployment.yml'
                   sh 'kubectl create -f db-service.yml '
                   sh 'kubectl create -f web-deployment.yml '
@@ -45,6 +46,7 @@ pipeline {
                   sh 'kubectl delete deployment  web-deployment'
                   sh 'kubectl delete service  db '
                   sh 'kubectl delete service  web-service'
+                  slackSend channel: 'devops', message: 'Fin du déploiement avec Kuberntes!'
             }
         }
 
