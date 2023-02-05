@@ -1,0 +1,16 @@
+
+[931004]
+username=931004
+secret=931004
+callerid=931004
+type=friend
+host=dynamic
+nat=no
+canreinvite=no
+context=formation
+disallow=all
+allow=ulaw
+allow=alaw
+allow=gsm
+allow=g729
+allow=g726

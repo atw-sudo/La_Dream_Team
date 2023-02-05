@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+    environment {
+        IMAGE_VERSION = "1.0.4"
+    }
+
+    stages {
+        
+        stage('Récupération du code sur la branche delivery') {
+            steps {
+                  git branch: 'main', url: 'https://github.com/atw-sudo/dev_dreamteam.git'
+            }
+         }
+         
+        stage('Build de l’image de l’application'){
+            steps{
+                  sh 'docker build -t webapp:$IMAGE_VERSION .'
+            }
+        }
+        
+        stage('Build de l’image de la base de données'){
+            steps{
+                  sh 'docker build -f Dockerfiledb -t dbapp:$IMAGE_VERSION .'
+            }
+        }
+        
+        stage('Déploiement des services via Docker Compose'){
+            steps{
+                  sh 'docker-compose up -d'
+                  sh 'sleep 100s'
+                  sh 'docker stop devops_web_1'
+                  sh 'docker stop devops_db_1'
+            }
+        }
+        
+        stage('Tag des images Docker'){
+            steps{
+                  sh 'docker tag webapp:$IMAGE_VERSION atw1a/webapp:$IMAGE_VERSION'
+                  sh 'docker tag dbapp:$IMAGE_VERSION atw1a/dbapp:$IMAGE_VERSION'
+            }
+        }
+        
+        stage('Push des images Docker sur Docker Hub'){
+            steps{
+                  sh 'docker login --username atw1a --password $(cat /home/atw/jenkinsfile_pwd)'
+                  sh 'docker push atw1a/webapp:$IMAGE_VERSION'
+                  sh 'docker push atw1a/dbapp:$IMAGE_VERSION'
+            }
+        }
+
+    }  
+}
