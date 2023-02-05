@@ -14,7 +14,7 @@ pipeline {
          
         stage('Build de l’image de l’application'){
             steps{
-                  slackSend(channel: 'devops', message: 'Build de l'application')
+                  slackSend(channel: 'devops', message: 'Build de l\'application')
                   sh 'docker build -t webapp:$IMAGE_VERSION .'
             }
         }
